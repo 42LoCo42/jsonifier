@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/converters" || exit 1
+(($# < 1)) && {
+	echo "Available converters:"
+	ls -1
+	exit
+}
+
+exec ./"$1"
