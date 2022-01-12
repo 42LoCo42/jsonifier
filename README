@@ -1,0 +1,5 @@
+jsonifier - turn command output into JSON
+This will be expanded over time (whenever I need to parse another output format)
+
+Available converters:
+pacman
