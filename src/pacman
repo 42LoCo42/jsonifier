@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+toGroup='|= (split("  ") | del(.[] | select(. == "None")))'
+
+sed -Ez 's|(.)\n|\1|g' \
+| perl -pe 's| +|  |g; s|"|\\"|g; s|([^]+?) *: ([^]+)|"$1":"$2",|g; s|,$||; s|^|{|; s|$|}|' \
+| jq '."Groups"        '"$toGroup" \
+| jq '."Provides"      '"$toGroup" \
+| jq '."Depends On"    '"$toGroup" \
+| jq '."Optional Deps" '"$toGroup" \
+| jq '."Required By"   '"$toGroup" \
+| jq '."Optional For"  '"$toGroup" \
+| jq '."Conflicts With"'"$toGroup" \
+| jq '."Replaces"      '"$toGroup" \
+| jq '."Validated By"  '"$toGroup"
